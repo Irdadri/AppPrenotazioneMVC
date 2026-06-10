@@ -1,5 +1,10 @@
 package com.appprenotazione.dto;
 
+import com.appprenotazione.model.Prenotazione;
+import com.appprenotazione.model.Sede;
+import com.appprenotazione.model.Stanza;
+import com.appprenotazione.model.Utente;
+
 import java.time.LocalDateTime;
 
 public class PrenotazioneDTO {
@@ -25,6 +30,22 @@ public class PrenotazioneDTO {
         this.stato = stato;
     }
 
+    public PrenotazioneDTO(Prenotazione prenotazione, Utente utente, Sede sede, Stanza stanza){
+        this.id = prenotazione.getId();
+        this.nomeUtente = utente.getNome();
+        this.nomeUtente = utente.getCognome();
+        this.citta = sede.getCitta();
+        this.indirizzo = sede.getIndirizzo();
+        this.nStanza = stanza.getnStanza();
+        this.dataInizio = prenotazione.getDataInizio();
+        this.dataFine = prenotazione.getDataFine();
+        this.stato = prenotazione.getStato();
+
+    }
+
+    public PrenotazioneDTO(Prenotazione prenotazione){
+        this.id = prenotazione.getId();
+    }
     public PrenotazioneDTO() {
     }
 

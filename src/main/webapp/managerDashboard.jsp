@@ -25,6 +25,7 @@
             <th>data fine</th>
             <th>stato</th>
         </tr>
+
         <c:forEach var="prenotazione" items="${listaPrenotazione}">
             <tr>
                 <td>${prenotazione.id} </td>
@@ -40,12 +41,13 @@
         </c:forEach>
     </table>
 </div>
-<%--
+
+
 <c:set var="tipoUtente" value="${utenteLoggato.tipoUtente}"/>
 <c:set var="checkUtente" value="manager"/>
 <c:if test="${ tipoUtente eq checkUtente }">
 </c:if>
---%>
+
 <a href="managerServlet">
     <button>Crea Utente</button>
 </a>

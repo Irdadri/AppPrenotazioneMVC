@@ -40,11 +40,6 @@
             <td>tipo utente</td>
             <td><input type="text" name="tipoUtente"></td>
         </tr>
-        <%--
-            <td>citta</td>
-            <td><input type="text" name="citta"></td>
-        </tr> modifica con form action datalist --%>
-
         <tr>
             <td>citta</td>
             <td>

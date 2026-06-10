@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.appprenotazione.model">
+    <class name="Sede" table="sede">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="paese" type="java.lang.String">
+            <column name="paese"/>
+        </property>
+
+
+        <property name="citta" type="java.lang.String">
+            <column name="citta"/>
+        </property>
+
+        <property name="regione" type="java.lang.String">
+            <column name="regione"/>
+        </property>
+        <property name="indirizzo" type="java.lang.String">
+            <column name="indirizzo"/>
+        </property>
+
+        <bag name="utentiSede" cascade="all">
+            <key column="id_sede"></key>
+            <one-to-many class="com.appprenotazione.model.Utente"/>
+        </bag>
+
+        <bag name="listStanze" cascade="all">
+            <key column="id_sede"></key>
+            <one-to-many class="com.appprenotazione.model.Stanza"/>
+        </bag>
+    </class>
+</hibernate-mapping>

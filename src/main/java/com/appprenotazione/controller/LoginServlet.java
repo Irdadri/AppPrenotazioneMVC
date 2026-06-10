@@ -1,11 +1,10 @@
 package com.appprenotazione.controller;
-
+import com.appprenotazione.DAO.PrenotazioneDAO;
+import com.appprenotazione.DAO.UserDAO;
 import com.appprenotazione.dto.PrenotazioneDTO;
 import com.appprenotazione.model.Prenotazione;
 import com.appprenotazione.model.Utente;
-import com.appprenotazione.utils.UtenteUtils;
 
-import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,19 +19,14 @@ import java.util.List;
 @WebServlet(name = "loginServlet", value = "/loginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private UtenteUtils utils;
-
-    @Resource(name = "jdbc/app_prenotazione")
-    private DataSource dataSource;
+    private UserDAO userDAO;
+    private PrenotazioneDAO prenotazioneDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        try {
-            utils = new UtenteUtils(dataSource);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        this.userDAO = new UserDAO();
+        this.prenotazioneDAO = new PrenotazioneDAO();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,18 +43,18 @@ public class LoginServlet extends HttpServlet {
 
         boolean error = false;
         try {
-            Utente utenteLogin = utils.loginUtente(email, password);
+            Utente utenteLogin = userDAO.loginUtente(email, password);
             if (utenteLogin != null) {
                 error = false;
                 if (utenteLogin.getTipoUtente().equals("manager")) {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/managerDashboard.jsp");
-                    List<PrenotazioneDTO> prenotazioneList = utils.getAllPrenotazioni();
+                    List<PrenotazioneDTO> prenotazioneList = prenotazioneDAO.getAllPrenotazioni();
                     request.setAttribute("listaPrenotazione", prenotazioneList);
                     session.setAttribute("utenteLoggato", utenteLogin);
                     dispatcher.forward(request, response);
                 } else if (utenteLogin.getTipoUtente().equals("user")) {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/userDashboard.jsp");
-                    List<PrenotazioneDTO> prenotazioneList = utils.getPrenotazioneUtente(utenteLogin.getId());
+                    List<PrenotazioneDTO> prenotazioneList = prenotazioneDAO.getPrenotazioniUtente(utenteLogin);
                     request.setAttribute("listaPrenotazione", prenotazioneList);
                     session.setAttribute("utenteLoggato", utenteLogin);
                     dispatcher.forward(request, response);
@@ -73,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

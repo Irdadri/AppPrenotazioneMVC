@@ -1,5 +1,7 @@
 package com.appprenotazione.model;
 
+import java.util.List;
+
 public class Utente {
     private int id;
     private String nome;
@@ -8,20 +10,12 @@ public class Utente {
     private String password;
     private String telefono;
     private String tipoUtente;
-    private int idSede;
+
+    private Sede sede;
+    private List<Prenotazione> listaPrenotazioni;
 
     public Utente() {
         //
-    }
-
-    public Utente(String nome, String cognome, String email, String password, String telefono, String tipoUtente, int idSede) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.password = password;
-        this.telefono = telefono;
-        this.tipoUtente = tipoUtente;
-        this.idSede = idSede;
     }
 
     public Utente(String nome, String cognome, String email, String password, String telefono, String tipoUtente) {
@@ -31,6 +25,18 @@ public class Utente {
         this.password = password;
         this.telefono = telefono;
         this.tipoUtente = tipoUtente;
+    }
+
+    public Utente(int id, String nome, String cognome, String email, String password, String telefono, String tipoUtente, Sede sede, List<Prenotazione> listaPrenotazioni) {
+        this.id = id;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.tipoUtente = tipoUtente;
+        this.sede = sede;
+        this.listaPrenotazioni = listaPrenotazioni;
     }
 
     public int getId() {
@@ -89,11 +95,19 @@ public class Utente {
         this.tipoUtente = tipoUtente;
     }
 
-    public int getIdSede() {
-        return idSede;
+    public Sede getSede() {
+        return sede;
     }
 
-    public void setIdSede(int idSede) {
-        this.idSede = idSede;
+    public void setSede(Sede sede) {
+        this.sede = sede;
+    }
+
+    public List<Prenotazione> getListaPrenotazioni() {
+        return listaPrenotazioni;
+    }
+
+    public void setListaPrenotazioni(List<Prenotazione> listaPrenotazioni) {
+        this.listaPrenotazioni = listaPrenotazioni;
     }
 }

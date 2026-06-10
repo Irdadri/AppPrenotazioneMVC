@@ -4,22 +4,22 @@ import java.time.LocalDateTime;
 
 public class Prenotazione {
     private int id;
-    private int idUtente;
-    private int idPostazione;
     private LocalDateTime dataInizio;
     private LocalDateTime dataFine;
     private String stato;
+    private Utente utente;
+    private Postazione postazione;
 
-    public Prenotazione() {
-    }
-
-    public Prenotazione(int id, int idUtente, int idPostazione, LocalDateTime dataInizio, LocalDateTime dataFine, String stato) {
+    public Prenotazione(int id, LocalDateTime dataInizio, LocalDateTime dataFine, String stato, Utente utente, Postazione postazione) {
         this.id = id;
-        this.idUtente = idUtente;
-        this.idPostazione = idPostazione;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.stato = stato;
+        this.utente = utente;
+        this.postazione = postazione;
+    }
+
+    public Prenotazione() {
     }
 
     public int getId() {
@@ -28,22 +28,6 @@ public class Prenotazione {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdUtente() {
-        return idUtente;
-    }
-
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
-    }
-
-    public int getIdPostazione() {
-        return idPostazione;
-    }
-
-    public void setIdPostazione(int idPostazione) {
-        this.idPostazione = idPostazione;
     }
 
     public LocalDateTime getDataInizio() {
@@ -68,5 +52,21 @@ public class Prenotazione {
 
     public void setStato(String stato) {
         this.stato = stato;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    public Postazione getPostazione() {
+        return postazione;
+    }
+
+    public void setPostazione(Postazione postazione) {
+        this.postazione = postazione;
     }
 }
