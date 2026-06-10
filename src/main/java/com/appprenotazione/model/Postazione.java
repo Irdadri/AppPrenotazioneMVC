@@ -1,17 +1,24 @@
 package com.appprenotazione.model;
 
+import javafx.geometry.Pos;
+
+import java.util.List;
+
 public class Postazione {
     private int id;
-    private int idStanza;
     private boolean manutenzione;
+    private Stanza stanza;
+    private List<Prenotazione> listaPrenotazioni;
 
-    public Postazione() {
+    public Postazione(int id, boolean manutenzione, Stanza stanza, List<Prenotazione> listaPrenotazioni) {
+        this.id = id;
+        this.manutenzione = manutenzione;
+        this.stanza = stanza;
+        this.listaPrenotazioni = listaPrenotazioni;
     }
 
-    public Postazione(int id, int idStanza, boolean manutenzione) {
-        this.id = id;
-        this.idStanza = idStanza;
-        this.manutenzione = manutenzione;
+    public Postazione(){
+        //
     }
 
     public int getId() {
@@ -22,19 +29,27 @@ public class Postazione {
         this.id = id;
     }
 
-    public int getIdStanza() {
-        return idStanza;
-    }
-
-    public void setIdStanza(int idStanza) {
-        this.idStanza = idStanza;
-    }
-
     public boolean isManutenzione() {
         return manutenzione;
     }
 
     public void setManutenzione(boolean manutenzione) {
         this.manutenzione = manutenzione;
+    }
+
+    public Stanza getStanza() {
+        return stanza;
+    }
+
+    public void setStanza(Stanza stanza) {
+        this.stanza = stanza;
+    }
+
+    public List<Prenotazione> getListaPrenotazioni() {
+        return listaPrenotazioni;
+    }
+
+    public void setListaPrenotazioni(List<Prenotazione> listaPrenotazioni) {
+        this.listaPrenotazioni = listaPrenotazioni;
     }
 }

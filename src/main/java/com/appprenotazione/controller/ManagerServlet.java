@@ -1,9 +1,13 @@
 package com.appprenotazione.controller;
 
+
+import com.appprenotazione.DAO.PrenotazioneDAO;
+import com.appprenotazione.DAO.SedeDAO;
+import com.appprenotazione.DAO.UserDAO;
 import com.appprenotazione.dto.UtenteDTO;
 import com.appprenotazione.model.Sede;
 import com.appprenotazione.model.Utente;
-import com.appprenotazione.utils.UtenteUtils;
+//import com.appprenotazione.utils.UtenteUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -18,24 +22,21 @@ import java.util.List;
 
 @WebServlet(name = "managerServlet", value = "/managerServlet")
 public class ManagerServlet extends HttpServlet {
-    private UtenteUtils utils;
-
-    @Resource(name = "jdbc/app_prenotazione")
-    private DataSource dataSource;
+    private UserDAO userDAO;
+    private PrenotazioneDAO prenotazioneDAO;
+    private SedeDAO sedeDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        try {
-            utils = new UtenteUtils(dataSource);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        this.userDAO = new UserDAO();
+        this.prenotazioneDAO = new PrenotazioneDAO();
+        this.sedeDAO = new SedeDAO();
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Sede> listaSedi = utils.getAllSedi();
+        List<Sede> listaSedi = sedeDAO.getAllSedi();
         request.setAttribute("listaSedi", listaSedi);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/createUser.jsp");
         dispatcher.forward(request, response);
@@ -45,11 +46,10 @@ public class ManagerServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int sedeId = Integer.parseInt(request.getParameter("sede"));
 
-        Utente utente = new Utente(request.getParameter("nome"), request.getParameter("cognome"), request.getParameter("email"),
-                request.getParameter("password"), request.getParameter("telefono"), request.getParameter("tipoUtente"),
-                sedeId);
+         Utente utente = new Utente(request.getParameter("nome"), request.getParameter("cognome"), request.getParameter("email"),
+                request.getParameter("password"), request.getParameter("telefono"), request.getParameter("tipoUtente"));
         try {
-            utils.inserisciUtente(utente);
+            userDAO.inserisciUtente(utente, sedeId);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
         } catch (RuntimeException e) {

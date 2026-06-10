@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.appprenotazione.model">
+    <class name="Prenotazione" table="prenotazione">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="dataInizio" type="java.time.LocalDateTime">
+            <column name="data_inizio"/>
+        </property>
+
+        <property name="dataFine" type="java.time.LocalDateTime">
+            <column name="data_fine"/>
+        </property>
+
+        <property name="stato" type="java.lang.String">
+            <column name="stato"/>
+        </property>
+
+        <many-to-one name="utente" class="com.appprenotazione.model.Utente">
+            <column name="id_utente"></column>
+        </many-to-one>
+
+        <many-to-one name="postazione" class="com.appprenotazione.model.Postazione">
+            <column name="id_postazione"></column>
+        </many-to-one>
+
+    </class>
+
+</hibernate-mapping>
