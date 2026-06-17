@@ -1,10 +1,9 @@
 package com.appprenotazione.utils;
 
-import com.appprenotazione.model.Utente;
-
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import com.appprenotazione.entities.Utente;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
 public class UserDataTag extends SimpleTagSupport {
@@ -57,7 +56,7 @@ public class UserDataTag extends SimpleTagSupport {
 
         out.println("</table>");
 
-        out.println("<a href=\"loginServlet\" method=\"GET\">" + "<button>logout</button>" + "</a>");
+        out.println("<a href=\"logout\" method=\"GET\">" + "<button>logout</button>" + "</a>");
 
         out.println("</details>");
     }

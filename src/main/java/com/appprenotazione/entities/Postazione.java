@@ -1,13 +1,26 @@
-package com.appprenotazione.model;
+package com.appprenotazione.entities;
 
-import javafx.geometry.Pos;
+import jakarta.persistence.*;
+
 
 import java.util.List;
 
+@Entity
+@Table(name = "postazione")
 public class Postazione {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "manutenzione")
     private boolean manutenzione;
+
+    @ManyToOne
+    @JoinColumn(name = "id_stanza", referencedColumnName = "id")
     private Stanza stanza;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postazione")
     private List<Prenotazione> listaPrenotazioni;
 
     public Postazione(int id, boolean manutenzione, Stanza stanza, List<Prenotazione> listaPrenotazioni) {

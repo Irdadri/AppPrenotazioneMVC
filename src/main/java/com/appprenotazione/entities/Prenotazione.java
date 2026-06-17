@@ -1,13 +1,32 @@
-package com.appprenotazione.model;
+package com.appprenotazione.entities;
+
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "prenotazione")
 public class Prenotazione {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "data_inizio")
     private LocalDateTime dataInizio;
+
+    @Column(name = "data_fine")
     private LocalDateTime dataFine;
+
+    @Column(name = "stato")
     private String stato;
+
+    @ManyToOne
+    @JoinColumn(name = "id_utente", referencedColumnName = "id")
     private Utente utente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_postazione", referencedColumnName = "id")
     private Postazione postazione;
 
     public Prenotazione(int id, LocalDateTime dataInizio, LocalDateTime dataFine, String stato, Utente utente, Postazione postazione) {

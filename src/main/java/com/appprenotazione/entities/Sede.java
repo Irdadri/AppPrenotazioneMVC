@@ -1,15 +1,33 @@
-package com.appprenotazione.model;
+package com.appprenotazione.entities;
+
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "sede")
 public class Sede {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "paese")
     private String paese;
+
+    @Column(name = "citta")
     private String citta;
+
+    @Column(name = "regione")
     private String regione;
+
+    @Column(name = "indirizzo")
     private String indirizzo;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sede")
     private List<Utente> utentiSede;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sede")
     private List<Stanza> listStanze;
 
 

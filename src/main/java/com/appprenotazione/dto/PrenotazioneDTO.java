@@ -1,9 +1,6 @@
 package com.appprenotazione.dto;
 
-import com.appprenotazione.model.Prenotazione;
-import com.appprenotazione.model.Sede;
-import com.appprenotazione.model.Stanza;
-import com.appprenotazione.model.Utente;
+import com.appprenotazione.entities.*;
 
 import java.time.LocalDateTime;
 
@@ -14,29 +11,32 @@ public class PrenotazioneDTO {
     private String citta;
     private String indirizzo;
     private String nStanza;
+    private int nPostazione;
     private LocalDateTime dataInizio;
     private LocalDateTime dataFine;
     private String stato;
 
-    public PrenotazioneDTO(int id, String nomeUtente, String cognomeUtente, String citta, String indirizzo, String nStanza, LocalDateTime dataInizio, LocalDateTime dataFine, String stato) {
+    public PrenotazioneDTO(int id, String nomeUtente, String cognomeUtente, String citta, String indirizzo, String nStanza, int nPostazione, LocalDateTime dataInizio, LocalDateTime dataFine, String stato) {
         this.id = id;
         this.nomeUtente = nomeUtente;
         this.cognomeUtente = cognomeUtente;
         this.citta = citta;
         this.indirizzo = indirizzo;
         this.nStanza = nStanza;
+        this.nPostazione = nPostazione;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.stato = stato;
     }
 
-    public PrenotazioneDTO(Prenotazione prenotazione, Utente utente, Sede sede, Stanza stanza){
+    public PrenotazioneDTO(Prenotazione prenotazione, Utente utente, Sede sede, Stanza stanza, Postazione postazione){
         this.id = prenotazione.getId();
         this.nomeUtente = utente.getNome();
         this.nomeUtente = utente.getCognome();
         this.citta = sede.getCitta();
         this.indirizzo = sede.getIndirizzo();
         this.nStanza = stanza.getnStanza();
+        this.nPostazione = postazione.getId();
         this.dataInizio = prenotazione.getDataInizio();
         this.dataFine = prenotazione.getDataFine();
         this.stato = prenotazione.getStato();
@@ -119,5 +119,13 @@ public class PrenotazioneDTO {
 
     public void setStato(String stato) {
         this.stato = stato;
+    }
+
+    public int getnPostazione() {
+        return nPostazione;
+    }
+
+    public void setnPostazione(int nPostazione) {
+        this.nPostazione = nPostazione;
     }
 }

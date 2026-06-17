@@ -1,25 +1,46 @@
 package com.appprenotazione.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.NumberFormat;
+
 public class UtenteDTO {
+
+    @NotNull
+    @Size(min = 1, max = 45)
     private String nome;
+
+    @NotNull
+    @Size(min = 1, max = 45)
     private String cognome;
+
+    @NotNull
+    @Size(min = 5, max = 45)
     private String email;
+
+    @NotNull
+    @Size(min = 1, max = 64)
     private String password;
+
+    @NotNull
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     private String telefono;
+
+    @NotNull
     private String tipoUtente;
-    private String citta;
-    private String indirizzo;
+
+    @NotNull
+    private Integer idSede;
 
 
-    public UtenteDTO(String nome, String cognome, String email, String password, String telefono, String tipoUtente, String citta, String indirizzo) {
+    public UtenteDTO(String nome, String cognome, String email, String password, String telefono, String tipoUtente, Integer idSede) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
         this.tipoUtente = tipoUtente;
-        this.citta = citta;
-        this.indirizzo = indirizzo;
+        this.idSede = idSede;
     }
 
     public UtenteDTO() {
@@ -73,19 +94,11 @@ public class UtenteDTO {
         this.tipoUtente = tipoUtente;
     }
 
-    public String getCitta() {
-        return citta;
+    public Integer getIdSede() {
+        return idSede;
     }
 
-    public void setCitta(String citta) {
-        this.citta = citta;
-    }
-
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
     }
 }
