@@ -56,8 +56,10 @@ public class UserDataTag extends SimpleTagSupport {
 
         out.println("</table>");
 
-        out.println("<a href=\"logout\" method=\"GET\">" + "<button>logout</button>" + "</a>");
+       // out.println("<a href= \"<spring:url value=\"/logout\"/> method=\"GET\">\" " + "<button>logout</button>" + "</a>");
+        //<a href="${pageContext.request.contextPath}/logout">logout</a>
 
+        //out.println("<a href=\"${pageContext.request.contextPath}/logout\">" + "<button>logout</button>" + "</a>");
         out.println("</details>");
     }
 }

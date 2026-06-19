@@ -24,35 +24,27 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String getLoginPage(ModelMap modelMap){
+    public String getLoginPage(ModelMap modelMap) {
         modelMap.addAttribute("loginForm", new LoginRequest());
         return "login";
     }
 
-    //BindingResult e Valid devono stare accanto o non funziona
     @PostMapping("/login")
     public String utenteLogin(ModelMap model,
                               @Valid @ModelAttribute("loginForm") LoginRequest loginRequest,
                               BindingResult result) {
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "login";
         }
 
         Utente utente = utenteService.loginUtente(loginRequest.getEmail(), loginRequest.getPassword());
         boolean error = false;
 
-
         if (utente != null) {
             error = false;
             model.addAttribute("utente", utente);
-            if (utente.getTipoUtente().equals("manager")) {
-                model.addAttribute("prenotazioni", prenotazioneService.getAllPrenotazioni());
-                return "managerDashboard";
-            } else {
-                model.addAttribute("prenotazioni", prenotazioneService.getPrenotazioniUtente(utente));
-                return "userDashboard";
-            }
+            return "redirect:/dashboard/";
         } else {
             error = true;
             model.addAttribute("error", error);
@@ -62,10 +54,9 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(SessionStatus sessionStatus){
+    public String logout(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
         return "redirect:/";
     }
-
 
 }

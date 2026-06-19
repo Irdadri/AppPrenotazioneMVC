@@ -17,6 +17,6 @@ public class SedeServiceImpl implements SedeService{
 
     @Override
     public List<Sede> getAllSedi() {
-        return sedeRepository.findAll().stream().toList();
+        return sedeRepository.findAll();
     }
 }
