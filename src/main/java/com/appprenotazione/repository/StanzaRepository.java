@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SedeRepository extends JpaRepository<Sede, Integer> {
-   public Sede findSedeById(int id);
-
+public interface StanzaRepository extends JpaRepository<Stanza, Integer> {
+    public List<Stanza> findBySede(Sede sede);
 }

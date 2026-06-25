@@ -1,46 +1,40 @@
 package com.appprenotazione.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.NumberFormat;
 
 public class UtenteDTO {
 
-    @NotNull
-    @Size(min = 1, max = 45)
     private String nome;
 
-    @NotNull
-    @Size(min = 1, max = 45)
     private String cognome;
 
-    @NotNull
-    @Size(min = 5, max = 45)
     private String email;
 
-    @NotNull
-    @Size(min = 1, max = 64)
-    private String password;
-
-    @NotNull
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
     private String telefono;
 
-    @NotNull
     private String tipoUtente;
 
-    @NotNull
-    private Integer idSede;
+    private String paese;
 
+    private String citta;
 
-    public UtenteDTO(String nome, String cognome, String email, String password, String telefono, String tipoUtente, Integer idSede) {
+    private String regione;
+
+    private String indirizzo;
+
+    public UtenteDTO(String nome, String cognome, String email, String telefono, String tipoUtente, String paese, String citta, String regione, String indirizzo) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.password = password;
         this.telefono = telefono;
         this.tipoUtente = tipoUtente;
-        this.idSede = idSede;
+        this.paese = paese;
+        this.citta = citta;
+        this.regione = regione;
+        this.indirizzo = indirizzo;
     }
 
     public UtenteDTO() {
@@ -70,14 +64,6 @@ public class UtenteDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -94,11 +80,35 @@ public class UtenteDTO {
         this.tipoUtente = tipoUtente;
     }
 
-    public Integer getIdSede() {
-        return idSede;
+    public String getPaese() {
+        return paese;
     }
 
-    public void setIdSede(Integer idSede) {
-        this.idSede = idSede;
+    public void setPaese(String paese) {
+        this.paese = paese;
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+
+    public void setCitta(String citta) {
+        this.citta = citta;
+    }
+
+    public String getRegione() {
+        return regione;
+    }
+
+    public void setRegione(String regione) {
+        this.regione = regione;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
     }
 }

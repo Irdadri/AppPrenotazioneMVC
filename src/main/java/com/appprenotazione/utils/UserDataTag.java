@@ -17,10 +17,10 @@ public class UserDataTag extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();
 
-        out.println("<details>");
-        out.println("<summary>");
-        out.println("dettagli utente");
-        out.println("</summary>");
+        //out.println("<details>");
+//        out.println("<summary>");
+//        out.println("dettagli utente");
+//        out.println("</summary>");
 
         out.println("<table class=\"table-user\">");
 
@@ -60,6 +60,6 @@ public class UserDataTag extends SimpleTagSupport {
         //<a href="${pageContext.request.contextPath}/logout">logout</a>
 
         //out.println("<a href=\"${pageContext.request.contextPath}/logout\">" + "<button>logout</button>" + "</a>");
-        out.println("</details>");
+       // out.println("</details>");
     }
 }

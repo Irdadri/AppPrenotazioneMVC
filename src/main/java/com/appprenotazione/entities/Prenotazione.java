@@ -1,11 +1,14 @@
 package com.appprenotazione.entities;
 
+import com.appprenotazione.config.CustomPrenotazioneSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "prenotazione")
+//@JsonSerialize(using = CustomPrenotazioneSerializer.class)
 public class Prenotazione {
 
     @Id

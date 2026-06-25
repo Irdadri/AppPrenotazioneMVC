@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%@ include file="common/head.jspf" %>
@@ -25,7 +22,7 @@
 
 <h3>Inserisci i dati</h3>
 
-<div class="bd-example m-0 border-0">
+<div class="bd-example m-0 border-0 p-lg-5 p-4">
     <form:form action="signup" method="POST" modelAttribute="nuovoUtente" class="row g-3">
         <div class="col-md-6">
             <form:label path="nome" for="inputName" class="form-label">nome</form:label>
@@ -82,4 +79,5 @@
     </form:form>
 </div>
 </body>
+<%@ include file="common/footer.jspf" %>
 </html>

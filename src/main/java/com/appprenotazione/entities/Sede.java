@@ -1,5 +1,6 @@
 package com.appprenotazione.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,20 +25,17 @@ public class Sede {
     @Column(name = "indirizzo")
     private String indirizzo;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sede")
-    private List<Utente> utentiSede;
-
+    //@JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sede")
     private List<Stanza> listStanze;
 
 
-    public Sede(int id, String paese, String citta, String regione, String indirizzo, List<Utente> utentiSede, List<Stanza> listStanze) {
+    public Sede(int id, String paese, String citta, String regione, String indirizzo, List<Stanza> listStanze) {
         this.id = id;
         this.paese = paese;
         this.citta = citta;
         this.regione = regione;
         this.indirizzo = indirizzo;
-        this.utentiSede = utentiSede;
         this.listStanze = listStanze;
     }
 
@@ -84,13 +82,6 @@ public class Sede {
         this.indirizzo = indirizzo;
     }
 
-    public List<Utente> getUtentiSede() {
-        return utentiSede;
-    }
-
-    public void setUtentiSede(List<Utente> utentiSede) {
-        this.utentiSede = utentiSede;
-    }
 
     public List<Stanza> getListStanze() {
         return listStanze;

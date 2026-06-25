@@ -2,11 +2,11 @@ package com.appprenotazione.config;
 
 import com.appprenotazione.dto.PrenotazioneDTO;
 import com.appprenotazione.dto.UtenteDTO;
+import com.appprenotazione.dto.UtenteRequest;
 import com.appprenotazione.entities.Prenotazione;
 import com.appprenotazione.entities.Utente;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,6 +21,7 @@ public class ModelMapperConfig {
         //specific config
        modelMapper.addMappings(prenotazioneDTOPropertyMap);
        modelMapper.addMappings(utentePropertyMap);
+       modelMapper.addMappings(utenteDTOPropertyMap);
 
        return modelMapper;
     }
@@ -37,10 +38,20 @@ public class ModelMapperConfig {
         }
     };
 
-    PropertyMap<UtenteDTO, Utente> utentePropertyMap = new PropertyMap<UtenteDTO, Utente>() {
+    PropertyMap<UtenteRequest, Utente> utentePropertyMap = new PropertyMap<UtenteRequest, Utente>() {
         @Override
         protected void configure() {
             map().getSede().setId(source.getIdSede());
+        }
+    };
+
+    PropertyMap<Utente, UtenteDTO> utenteDTOPropertyMap = new PropertyMap<Utente, UtenteDTO>() {
+        @Override
+        protected void configure() {
+            map().setPaese(source.getSede().getPaese());
+            map().setCitta(source.getSede().getCitta());
+            map().setRegione(source.getSede().getRegione());
+            map().setIndirizzo(source.getSede().getIndirizzo());
         }
     };
 }

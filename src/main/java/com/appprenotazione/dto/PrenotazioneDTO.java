@@ -1,6 +1,7 @@
 package com.appprenotazione.dto;
 
 import com.appprenotazione.entities.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +13,12 @@ public class PrenotazioneDTO {
     private String indirizzo;
     private String nStanza;
     private int nPostazione;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataInizio;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataFine;
+
     private String stato;
 
     public PrenotazioneDTO(int id, String nomeUtente, String cognomeUtente, String citta, String indirizzo, String nStanza, int nPostazione, LocalDateTime dataInizio, LocalDateTime dataFine, String stato) {
@@ -29,7 +34,7 @@ public class PrenotazioneDTO {
         this.stato = stato;
     }
 
-    public PrenotazioneDTO(Prenotazione prenotazione, Utente utente, Sede sede, Stanza stanza, Postazione postazione){
+    public PrenotazioneDTO(Prenotazione prenotazione, Utente utente, Sede sede, Stanza stanza, Postazione postazione) {
         this.id = prenotazione.getId();
         this.nomeUtente = utente.getNome();
         this.nomeUtente = utente.getCognome();
@@ -43,9 +48,10 @@ public class PrenotazioneDTO {
 
     }
 
-    public PrenotazioneDTO(Prenotazione prenotazione){
+    public PrenotazioneDTO(Prenotazione prenotazione) {
         this.id = prenotazione.getId();
     }
+
     public PrenotazioneDTO() {
     }
 

@@ -1,6 +1,7 @@
 package com.appprenotazione.repository;
 
 import com.appprenotazione.entities.Prenotazione;
+import com.appprenotazione.entities.Sede;
 import com.appprenotazione.entities.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 

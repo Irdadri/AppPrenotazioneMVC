@@ -1,6 +1,7 @@
 package com.appprenotazione.service;
 
 import com.appprenotazione.dto.UtenteDTO;
+import com.appprenotazione.dto.UtenteRequest;
 import com.appprenotazione.entities.Sede;
 import com.appprenotazione.entities.Utente;
 import com.appprenotazione.repository.SedeRepository;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HexFormat;
+import java.util.List;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
@@ -44,16 +47,16 @@ public class UtenteServiceImpl implements UtenteService {
         return null;
     }
 
-    public void inserisciUtente(UtenteDTO utenteDTO) {
+    public void inserisciUtente(UtenteRequest utenteRequest) {
         try {
-            utenteDTO.setPassword(passwordEncrypting(utenteDTO.getPassword()));
+            utenteRequest.setPassword(passwordEncrypting(utenteRequest.getPassword()));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        Utente utente = modelMapper.map(utenteDTO, Utente.class);
+        Utente utente = modelMapper.map(utenteRequest, Utente.class);
 
-        if (utenteDTO.getIdSede() != null) {
-            Sede sede = sedeRepository.findSedeById(utenteDTO.getIdSede());
+        if (utenteRequest.getIdSede() != null) {
+            Sede sede = sedeRepository.findSedeById(utenteRequest.getIdSede());
             if(sede != null) {
                 utente.setSede(sede);
             } else {
@@ -72,5 +75,15 @@ public class UtenteServiceImpl implements UtenteService {
                 password.getBytes(StandardCharsets.UTF_8));
 
         return HexFormat.of().formatHex(encodedhash);
+    }
+
+    public List<UtenteDTO> getAllUtenti(){
+        List<Utente> utenti = repository.findAll();
+        List<UtenteDTO> utentiDTO = new ArrayList<>();
+        for(int i=0; i<utenti.size(); i++){
+            utentiDTO.add(modelMapper.map(utenti.get(i), UtenteDTO.class));
+        }
+
+        return utentiDTO;
     }
 }

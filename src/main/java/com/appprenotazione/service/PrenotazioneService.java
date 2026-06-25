@@ -1,11 +1,14 @@
 package com.appprenotazione.service;
 
 import com.appprenotazione.dto.PrenotazioneDTO;
+import com.appprenotazione.dto.PrenotazioneRequest;
+import com.appprenotazione.entities.Prenotazione;
 import com.appprenotazione.entities.Utente;
 
 import java.util.List;
 
 public interface PrenotazioneService {
-    public List<PrenotazioneDTO> getAllPrenotazioni();
-    public List<PrenotazioneDTO> getPrenotazioniUtente(Utente utente);
+    List<PrenotazioneDTO> getAllPrenotazioni();
+    List<PrenotazioneDTO> getPrenotazioniUtente(Utente utente);
+    Prenotazione insertPrenotazione(PrenotazioneRequest request, Utente utente);
 }

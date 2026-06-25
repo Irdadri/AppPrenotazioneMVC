@@ -1,5 +1,6 @@
 package com.appprenotazione.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -20,6 +21,7 @@ public class Postazione {
     @JoinColumn(name = "id_stanza", referencedColumnName = "id")
     private Stanza stanza;
 
+    //@JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postazione")
     private List<Prenotazione> listaPrenotazioni;
 

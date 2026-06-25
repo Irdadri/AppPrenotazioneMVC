@@ -4,15 +4,16 @@ import jakarta.validation.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 public class LoginRequest {
 
-    @NotNull
+    @NotBlank
     @Size(max = 45)
     private String email;
 
-    @NotNull
+    @NotBlank
     @Size(max = 64)
     private String password;
 

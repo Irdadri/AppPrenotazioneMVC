@@ -2,6 +2,7 @@ package com.appprenotazione.entities;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class Stanza {
     @Column(name = "n_stanza")
     private String nStanza;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stanza")
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stanza", fetch = FetchType.EAGER)
     private List<Postazione> listaPostazioni;
 
     @ManyToOne
